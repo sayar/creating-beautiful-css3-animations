@@ -1,0 +1,79 @@
+{
+  "_args": [
+    [
+      "reveal-css-snippet",
+      "/Users/ramisayar/Desktop/FITC - Creating Beautiful CSS3 Animations"
+    ]
+  ],
+  "_from": "reveal-css-snippet@latest",
+  "_id": "reveal-css-snippet@0.1.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/reveal-css-snippet",
+  "_nodeVersion": "0.12.5",
+  "_npmUser": {
+    "email": "benjamin@soluml.com",
+    "name": "soluml"
+  },
+  "_npmVersion": "2.11.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "reveal-css-snippet",
+    "raw": "reveal-css-snippet",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/reveal-css-snippet/-/reveal-css-snippet-0.1.2.tgz",
+  "_shasum": "9e6bb62a92dd4cf5bab056d5ef4724235daa54f3",
+  "_shrinkwrap": null,
+  "_spec": "reveal-css-snippet",
+  "_where": "/Users/ramisayar/Desktop/FITC - Creating Beautiful CSS3 Animations",
+  "author": {
+    "email": "benjamin@soluml.com",
+    "name": "Benjamin Solum",
+    "url": "https://soluml.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/soluml/reveal-css-snippet/issues"
+  },
+  "dependencies": {},
+  "description": "A Reveal.js plugin that allows live CSS editing in code blocks.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "9e6bb62a92dd4cf5bab056d5ef4724235daa54f3",
+    "tarball": "http://registry.npmjs.org/reveal-css-snippet/-/reveal-css-snippet-0.1.2.tgz"
+  },
+  "homepage": "https://github.com/soluml/reveal-css-snippet#readme",
+  "keywords": [
+    "Reveal.js",
+    "code",
+    "css",
+    "live",
+    "snippet"
+  ],
+  "license": {
+    "name": "MIT"
+  },
+  "main": "css-snippet.js",
+  "maintainers": [
+    {
+      "name": "soluml",
+      "email": "benjamin@soluml.com"
+    }
+  ],
+  "name": "reveal-css-snippet",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soluml/reveal-css-snippet.git"
+  },
+  "scripts": {},
+  "version": "0.1.2"
+}

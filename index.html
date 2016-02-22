@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>FITC Amsterdam 2016 - Creating a Beautiful CSS3 Animations</title>
+
+    <meta name="description" content="FITC Amsterdam 2016 - Creating a Beautiful CSS3 Animations">
+    <meta name="author" content="Rami Sayar">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style>
+.trans-anim {
+  transition:all 2s ease-in-out;
+  perspective: 800px;
+  perspective-origin: 50% 100px;
+}
+    </style>
+  </head>
+
+  <body>
+
+<!--
+Use h1 for slides with only a title
+Use h2 for slides with title & content
+-->
+
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Creating Beautiful CSS Animations</h1>
+          <h3><a href="https://twitter.com/ramisayar">@ramisayar</a></h3>
+          <p>
+            <small>FITC Amsterdam 2016</small>
+          </p>
+        </section>
+
+        <section>
+          <section data-markdown>
+## Agenda
+* History of Animation on the Web
+* Introducing CSS3 Animations
+* Browser Compatibility
+* CSS3 Animation Libraries
+* Principles for Beautiful Animations
+          </section>
+          <section data-markdown>
+## Assumptions
+* You know what the web is…
+* Working knowledge of HTML5 &amp; CSS3.
+* Slides will be made available on [SlideShare.net/RamiSayar](http://slideshare.net/ramisayar)</a>
+          </section>
+          <section data-background="img/ramisayar.png">
+          </section>
+          <section data-background="img/snowyowlmtl.png">
+          </section>
+        </section>
+        <section>
+          <section>
+						<iframe width="1280" height="768" data-src="ripgeocities.html"></iframe>
+          </section>
+          <section>
+            <h1><a href="http://www.cameronsworld.net/" data-preview-link>Cameron's World</a></h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>And then there was flash</h1>
+          </section>
+          <section>
+            <h2>It was a very dark time for the web. I can’t believe this still <a href="http://industrialpainter.com" data-preview-link>exists</a>... </h2>
+          </section>
+          <section>
+            <h1>Classic Flash Animations</h1>
+          </section>
+          <section>
+            <iframe width="640" height="480" src="https://www.youtube.com/embed/AYdDRTRaWr8" frameborder="0" allowfullscreen></iframe>
+          </section>
+          <section>
+            <iframe width="640" height="480" src="https://www.youtube.com/embed/npTC6b5-yvM" frameborder="0" allowfullscreen></iframe>
+          </section>
+          <section>
+            <iframe width="640" height="480" src="https://www.youtube.com/embed/nxM1cnphLpw" frameborder="0" allowfullscreen></iframe>
+          </section>
+          <!--<section>
+            <h2><a href="http://astrange.ithinksw.net/flash/" data-preview-link>The Best Flash Animation of All Time</a></h2>
+          </section> -->
+          <section>
+            <h1>Things didn't end well...</h1>
+          </section>
+          <section>
+            <h2>April 2010, Steve Jobs writes <a href="http://www.apple.com/hotnews/thoughts-on-flash/">“Thoughts on Flash”</a></h2>
+            <img src="img/stevejobs.png" />
+          </section>
+          <section data-background="img/occupyflash.png">
+          </section>
+          <section>
+            <h1>RIP Flash. 2015</h1>
+          </section>
+          <section>
+            <h2>But One More For Old Times Sake</h2>
+            <iframe width="640" height="480" src="https://www.youtube.com/embed/EOfy5LDpEHo" frameborder="0" allowfullscreen></iframe>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+## While Flash existed, we had JavaScript &amp; DHTML
+          </section>
+          <section data-markdown>
+## DHTML is the combination of HTML, CSS and JavaScript.
+* Animate text and images in their document, independently moving each element from any starting point to any ending point, following a predetermined path or one chosen by the user.
+* Embed a ticker that automatically refreshes its content with the latest news, stock quotes, or other data.
+* Use a form to capture user input, and then process, verify and respond to that data without having to send data back to the server.
+* Include rollover buttons or drop-down menus.
+          </section>
+          <section>
+            <h2><a href="http://www.cwdjr.net/text/DrunkHarlequinText.html" target="_blank" data-preview-link>Drunk Harlequin Text</a></h2>
+          </section>
+          <section>
+            <h2>DHTML Code Sample</h2>
+            <pre><code class="hljs" data-trim contenteditable>
+function splat(text){   // randomize text color, size, and weight
+  text=text.substring(0,text.length);
+  var fs=.5
+  for(i=0;text.length &gt; i;i++){
+    f=Math.random();
+    if (Math.abs(f-fs) &lt; .11) {f=Math.random()};
+    if (Math.abs(f-fs) &lt; .11) {f=Math.random()};
+    if (f&lt;.1) {c='00ffff'};
+    if (f&gt;=.1 &amp;&amp; f&lt;.2) {c='7cfc00'};
+    if (f&gt;=.2 &amp;&amp; f&lt;.3) {c='6495ed'};
+    if (f&gt;=.3 &amp;&amp; f&lt;.4) {c='ffd700'};
+    if (f&gt;=.4 &amp;&amp; f&lt;.5) {c='ff7f50'};
+    if (f&gt;=.5 &amp;&amp; f&lt;.6) {c='ff00ff'};
+    if (f&gt;=.6 &amp;&amp; f&lt;.7) {c='ccff00'};
+    if (f&gt;=.7 &amp;&amp; f&lt;.8) {c='ff6964'};
+    if (f&gt;=.8 &amp;&amp; f&lt;.9) {c='ff4500'};
+    if (f&gt;=.9) {c='dc143c'};
+    g=Math.random();
+    if (g&lt;.5) {w="font-weight:bold"};
+    if (g &gt;=.5) {w="font-style:italic"};
+    r=Math.random();
+    if (r&lt;.33) {s=10};
+    if (r&gt;=.33 &amp;&amp; r&lt;.66){s=15};
+    if (r&gt;=.55) {s=20};
+    document.write('&lt;span style="color:#'+c+'; font-size:'+s+'px;'+w+'"&gt;'+text.substring(i,i+1)+'&lt;\/span&gt;');
+      fs=f
+    }
+  }
+
+  function jerk(){   // shake text
+    h=Math.random(); // randomize vertical displacements
+    if (h&lt;.1) {j=0};
+    if (h&gt;=.1 &amp;&amp; h&lt;.2) {j=4};
+    if (h&gt;=.2 &amp;&amp; h&lt;.3) {j=8};
+    if (h&gt;=.3 &amp;&amp; h&lt;.4) {j=12};
+    if (h&gt;=.4 &amp;&amp; h&lt;.5) {j=16};
+    if (h&gt;=.5 &amp;&amp; h&lt;.6) {j=20};
+    if (h&gt;=.6 &amp;&amp; h&lt;.7) {j=24};
+    if (h&gt;=.7 &amp;&amp; h&lt;.8) {j=28};
+    if (h&gt;=.8 &amp;&amp; h&lt;.9) {j=32};
+    if (h&gt;=.9) {j=36};
+
+    z=Math.random();  // randomize horizontal displacements
+    if (z&lt;.1) {m=0};
+    if (z&gt;=.1 &amp;&amp; z&lt;.2) {m=4};
+    if (z&gt;=.2 &amp;&amp; z&lt;.3) {m=8};
+    if (z&gt;=.3 &amp;&amp; z&lt;.4) {m=12};
+    if (z&gt;=.4 &amp;&amp; z&lt;.5) {m=16};
+    if (z&gt;=.5 &amp;&amp; z&lt;.6) {m=20};
+    if (z&gt;=.6 &amp;&amp; z&lt;.7) {m=24};
+    if (z&gt;=.7 &amp;&amp; z&lt;.8) {m=28};
+    if (z&gt;=.8 &amp;&amp; z&lt;.9) {m=32};
+    if (z&gt;=.9) {m=36};
+
+    if (document.all &amp;&amp; !document.getElementById){
+      document.all['shake'].style.pixelTop =j+10;
+      document.all['shake'].style.pixelLeft =m+20
+    }
+
+    else{
+      document.getElementById('shake').style.top=j+10+'px';
+      document.getElementById('shake').style.left=m+20+'px';
+    }
+
+    setTimeout("jerk()",500); // the 500 ms
+}
+          </code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>JavaScript and HTML5 Canvas</h2>
+<h4>Examples:</h4>
+<ul>
+	<li><a href="http://codepen.io/dissimulate/pen/KrAwx" target="_blank">Tearable Cloth</a></li>
+	<li><a href="http://www.freeriderhd.com/t/1016-layers" target="_blank">Free Rider HD</a></li>
+</ul>
+<p>Canvas is great for big, complex animations but it absolutely kills accessibility on your website. Not to mention that the JavaScript code quickly becomes complicated.</p>
+        </section>
+        <section data-markdown>
+## History of Animations on the Web
+* 1987 – Initial release of Graphics Interchange Format
+* 1996 – Initial release of Adobe Flash Player
+* 1997 – Netscape releases the “layers” feature in Netscape 4.
+  * Layers was a precursor to div. Subsequently, dropped for divs.
+  * JavaScript animations popular, part of a set of techniques called Dynamic HTML. Standards movement contributed to death of DHTML.
+* 2004 – HTML5 Canvas Introduced by Apple in WebKit.
+* 2008 – Initial release of Animated Portable Network Graphics (apng)
+* 2009 – Initial Draft of CSS Animations (CSS3 Module)
+* 2012-2016 – Resurgence of GIF in popularity???
+        </section>
+        <section data-background="img/cssawesome.png">
+        </section>
+        <section>
+          <section>
+            <h1>Introducing CSS3 Animations</h1>
+          </section>
+          <section data-markdown>
+## Introducing CSS3 Animations
+* CSS3 Animations can be performed with 3 different techniques:
+  * Transitions
+  * Transforms
+  * Animations (Narrow Definition)
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1>CSS3 Transitions</h1>
+          </section>
+          <section>
+            <h2>CSS3 Transitions</h2>
+            <pre><code class="hljs" data-trim>
+transition: [ &lt;transition-property&gt; || &lt;transition-duration&gt;
+|| &lt;transition-timing-function&gt; || &lt;transition-delay&gt; ]&#10;
+            </code></pre>
+            <p>transition-property includes color, width, height, background-color, padding, margin, top, right, bottom, left, font-size, font-weight, etc.</p>
+            <p>See <a href="https://www.w3.org/TR/css3-transitions/#properties-from-css-" data-preview-link>W3C Spec.</a></p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions</h2>
+            <pre><code class="hljs" data-trim>
+transition: [ &lt;transition-property&gt; || &lt;transition-duration&gt;
+|| &lt;transition-timing-function&gt; || &lt;transition-delay&gt; ]&#10;
+            </code></pre>
+            <p>transition-duration is how long the animation takes in seconds.</p>
+            <p>transition-delay is how long the animation waits before changing the transition-property.</p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions</h2>
+            <pre><code class="hljs" data-trim>
+transition: [ &lt;transition-property&gt; || &lt;transition-duration&gt;
+|| &lt;transition-timing-function&gt; || &lt;transition-delay&gt; ]&#10;
+            </code></pre>
+            <p>transition-timing-function determines how intermediate values of the transition are calculated. Only two classes of timing functions: cubic-bezier() and steps() functions.</p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – Timing Functions</h2>
+            <img src="img/example-bezier-curves.png" />
+            <p><small>Reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">MDN</a></small></p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – cubic-bezier()</h2>
+            <ul>
+              <li>cubic-bezier() defines a cubic Bézier curve</li>
+              <li>Curves are continuous, sometimes called easing functions.</li>
+            </ul>
+            <p><small>Reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">MDN</a></small></p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – cubic-bezier()</h2>
+            <ul>
+              <li>Defined by four points P0, P1, P2, and P3. P0 and P3 are the start and the end of the curve.</li>
+              <li>In CSS3, P0 is always set to (0, 0) and represents the initial time and the initial state, P3 is (1, 1) and represents the final time and the final state.</li>
+            </ul>
+            <p><small>Reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">MDN</a></small></p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – cubic-bezier()</h2>
+            <img src="img/bizier-explanation.png" />
+            <p><small>Reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">MDN</a></small></p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – cubic-bezier()</h2>
+            <ul>
+              <li>Invalid curves are possible and cause the entire property to be ignored.</li>
+              <li>P1 or P2 ordinate outside the [0, 1] range may generate bouncing effects.</li>
+            </ul>
+            <pre><code class="hljs" data-trim>
+cubic-bezier(x1, y1, x2, y2);
+            </code></pre>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – cubic-bezier()</h2>
+            <ul>
+              <li>Common cubic bezier are named in CSS3.</li>
+              <li>Cheat Sheet <a href="http://easings.net" data-preview-link>easings.net</a></li>
+            </ul>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – steps()</h2>
+            <ul>
+              <li>steps(number_of_steps, direction) defines a step function with the direction indicating if it’s left/right-continuous.</li>
+              <li>Direction is specified with start||end.</li>
+            </ul>
+            <p><small>Reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">MDN</a></small></p>
+          </section>
+          <section>
+            <h2>CSS3 Transitions – steps()</h2>
+            <pre><code class="hljs" data-trim>
+steps(2, start);
+            </code></pre>
+            <img src="img/steps-example.png" />
+            <p><small>Reference <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">MDN</a></small></p>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+## CSS3 Transforms
+#### 2D Transforms:
+
+```css
+transform: skew(x, y | &lt;angle&gt;)&#10;  || scale(x, y | &lt;length&gt; or &lt;percentage&gt;) || rotate(angle | &lt;angle&gt;)&#10;  || translate(x, y | &lt;length&gt; or &lt;percentage&gt;)
+```
+          </section>
+					<section id="css2dtransforms-slide">
+						<h2>CSS3 2D Transforms Code Sample</h2>
+            <img id="twodtrans-1" class="trans-anim" width="100px" src="img/fitc_logo_redspot.png" style="margin-right:100px" />
+            <img id="twodtrans-2" class="trans-anim" width="100px" src="img/fitc_logo_redspot.png" style="margin-right:100px" />
+            <img id="twodtrans-3" class="trans-anim" width="100px" src="img/fitc_logo_redspot.png" style="margin-right:100px" />
+            <img id="twodtrans-4" class="trans-anim" width="100px" src="img/fitc_logo_redspot.png" />
+					</section>
+					<section data-markdown>
+## CSS3 Transforms
+#### 3D Transforms:
+
+```css
+transform: translate3d(x, y, z | &lt;length&gt; or &lt;percentage&gt;)&#10; /* Except z=&lt;length&gt; */&#10;  || scale3d(x, y, z | &lt;number&gt;)&#10;  ||&nbsp;rotateX(&lt;angle&gt;)&#10;  || rotateY(&lt;angle&gt;)&#10;  ||&nbsp;rotateZ(&lt;angle&gt;)
+```
+
+Perspective and perspective-origin set user’s perspective and vanishing point.
+
+There are other properties like: transform-box, transform-origin, transform-style, backface-visibility.
+          </section>
+          <section id="css3dtransforms-slide">
+            <h2>CSS3 3D Transforms Code Sample</h2>
+            <img id="threedtrans-1" class="trans-anim" width="100px" src="img/fitc_logo_redspot.png" style="margin-right:100px" />
+            <img id="threedtrans-2" class="trans-anim" width="100px" src="img/fitc_logo_redspot.png" style="margin-right:100px" />
+            <img id="threedtrans-3" class="trans-anim" width="100px" src="img/fitc_logo_redspot.png" style="margin-right:100px" />
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+## CSS3 Animations - @keyframes
+* @keyframes define what an animation looks like at each stage.
+* @keyframes are composed of three parts:
+  * name - name of the animation
+  * stage – a percentage used to define the properties at that stage. 0% (also can use from) and 100% (also can use to) have to be defined.
+  * properties – CSS properties
+          </section>
+          <section>
+            <h2>CSS3 Animations - @keyframes</h2>
+            <pre><code class="hljs" data-trim>
+@keyframes name {
+  0% {/*can use from */
+    top: 0;
+  }
+  50% {
+    top: 30px;
+  }
+  100% {/* can use to*/
+    top: 0;
+  }
+}
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>CSS3 Animations - Animation</h2>
+          </section>
+          <section data-markdown>
+## CSS3 Animations - Animation
+* Animation does two things:
+  * Assign the @keyframes to the elements.
+  * Define how it is animated.
+
+```css
+#div {
+  animation-name: keyframe-name;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+}
+```
+          </section>
+          <section data-markdown>
+## CSS3 Animations - Animation Properties
+* Animation Properties:
+  * animation-name: name (Default: none)
+  * animation-duration: time of animation in seconds (Default: 0s)
+  * animation-timing-function: timing function, remember cubic bezier curves  (Default: ease)
+  * animation-delay: delay to start of animation (Default: 0s)
+					</section>
+					<section data-markdown>
+## CSS3 Animations - Animation Properties
+* Animation Properties:
+  * animation-iteration-count: times to run the animation (Default: 1)
+  * animation-direction: direction to play the animation, normal || reverse || alternate || alternate-reverse (Default: normal)
+  * animation-fill-mode:  how should CSS apply styles, none || forwards || backwards || both (Default: none)
+  * animation-play-state:  animation running || paused (Default: running)
+          </section>
+          <section data-markdown>
+## CSS3 Animations - Animation Properties
+Animation Shorthand Syntax:
+
+```css
+animation: [animation-name]
+  [animation-duration]
+  [animation-timing-function]
+  [animation-delay]
+  [animation-iteration-count];
+```
+          </section>
+          <section id="css3anim-slide">
+            <h2>CSS3 Animation Code Sample</h2>
+            <img id="css3animation" width="100px" src="img/fitc_logo_redspot.png" />
+          </section>
+          <section>
+            <h2>Beautiful CSS Animation Examples</h2>
+            <ul>
+              <li><a href="http://codepen.io/juliangarnier/pen/idhuG" target="_blank">CSS 3D Solar System</a></li>
+              <li><a href="http://anthonycalzadilla.com/css3-ATAT/index.html" target="_blank">Pure CSS3 AT-AT Walker</a></li>
+              <li><a href="http://roxik.com/cat/" target="_blank">Stretchy Cat</a></li>
+            </ul>
+          </section>
+        </section>
+        <section data-background="img/99littlebugs.png">
+        </section>
+        <section>
+          <section>
+            <h1>Browser Compatibility</h1>
+          </section>
+          <section>
+						<img src="img/csstransition.png" />
+          </section>
+					<section>
+						<img src="img/css2dtransform.png" />
+          </section>
+					<section>
+						<img src="img/css3dtransform.png" />
+          </section>
+					<section>
+						<img src="img/cssanimation.png" />
+          </section>
+          <section data-markdown>
+## Handling Browser Prefixes Sanely – AutoPrefixer
+* [PostCSS](https://github.com/postcss/postcss) plugin to parse CSS and add vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com/).
+* Can add to Grunt and Gulp.
+          </section>
+          <section data-markdown>
+```css
+@keyframes name {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 30px;
+  }
+  100% {
+    top: 0;
+  }
+}
+```
+          </section>
+          <section data-markdown>
+# becomes
+          </section>
+          <section data-markdown>
+```css
+@-webkit-keyframes name {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 30px;
+  }
+  100% {
+    top: 0; }
+  }
+@keyframes name {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 30px;
+  }
+ 100% {
+    top: 0;
+  }
+}
+```
+          </section>
+					<section data-markdown>
+## Handling Browser Prefixes Sanely – Bourbon.io
+* Simple mixins library for Sass. Using @include to output prefixes.
+
+```css
+box:hover {
+  @include animation(scale 1.0s ease-in, slide 2.0s ease);
+}
+```
+					</section>
+        </section>
+				<section>
+					<section>
+<h2>CSS3 Animation Libraries</h2>
+<p>animate.css is a bunch of cool, fun, and cross-browser animations for you to use in your projects. Great for emphasis, home pages, sliders, and general just-add-water-awesomeness.
+<a href="https://daneden.github.io/animate.css/" target="_blank">Demo</a>
+</p>
+
+<p>Magic.css is a bunch of CSS3 Animations with special effects. <a href="http://minimamente.com/example/magic_animations/" target="_blank">Demo</a></p>
+					</section>
+          <section>
+<h1><a href="http://www.wonder-tonic.com/geocitiesizer/" target="_blank">The Geocities-izer</a></h1>
+          </section>
+        </section>
+
+        <section>
+          <section data-markdown>
+# Principles for Beautiful Animations
+          </section>
+          <section>
+            <h3>Disney Animation: The Illusion of Life</h3>
+            <img width="300" src="img/illusion_of_life.jpg" />
+            <p>Book by Ollie Johnston and Frank Thomas, two of the animation masters at Disney's during the Golden Age of animation, referred by Walt Disney as his "Nine Old Men".</p>
+          </section>
+          <section data-markdown>
+# Principle 1: Squash and Stretch
+
+Give a sense of weight and flexibility to drawn objects.
+          </section>
+          <section data-markdown>
+# Principle 2: Anticipation
+
+Prepare the audience for an action, and to make the action appear more realistic.
+Ex. A dancer jumping off the floor has to bend his knees first.
+          </section>
+          <section data-markdown>
+# Principle 3: Staging
+
+Direct the audience's attention and make it clear what is important.
+          </section>
+          <section data-markdown>
+# Principle 4: Straight Ahead Action and Pose to Pose
+
+ "Straight ahead action" means drawing out a scene frame by frame from beginning to end, while "pose to pose" involves starting with drawing a few key frames, and then filling in the intervals later.          </section>
+          <section data-markdown>
+# Principle 5: Follow Through and Overlapping Action
+
+Give the impression that characters follow the laws of physics, including the principle of inertia.
+          </section>
+          <section data-markdown>
+# Principle 6: Slow In and Slow Out
+
+Accelerate and Decelerate.
+          </section>
+          <section data-markdown>
+# Principle 7: Follow Arcs
+          </section>
+          <section data-markdown>
+# Principle 8: Secondary Action
+          </section>
+          <section data-markdown>
+# Principle 9: Timing (aka frames/second)
+          </section>
+          <section data-markdown>
+# Principle 10: Exaggeration
+          </section>
+          <section data-markdown>
+# Principle 11: Solid drawing
+          </section>
+          <section data-markdown>
+# Principle 12: Appeal aka Charisma
+          </section>
+          <section data-markdown>
+# [Pure CSS Fail Whale](http://www.subcide.com/experiments/fail-whale/)
+          </section>
+        </section>
+
+				<section>
+					<section data-markdown>
+## What did we learn?
+* History of Animation on the Web
+* CSS3 Animations
+  * Transitions
+  * Transforms
+  * @keyframes &amp; Animations
+* Browser Compatibility
+  * Autoprefixer
+  * Bourbon.io
+* CSS3 Animation Libraries
+  * Animate.css
+					</section>
+					<section data-markdown>
+# Thank You! Questions?
+## Also, I would love to speak more in Europe ;)
+#### tw: [@ramisayar](https://twitter.com/ramisayar) | gh: [@sayar](https://github.com/sayar)
+#### [slideshare.net/ramisayar](https://slideshare.net/ramisayar)
+					</section>
+					<section data-markdown>
+## Resources, References, Links
+* http://dailyjs.com/2010/06/27/167-history-of-javascript/
+* http://www.nytimes.com/2013/02/14/fashion/common-on-early-internet-gif-files-make-comeback.html?_r=1&
+* https://hg.csswg.org/drafts/log/2579c1842a7c/css3-animations/Overview.src.html
+* http://www.peterbe.com/plog/worst-flash-site-of-the-year-2010
+* https://www.kirupa.com/html5/creating_simple_html5_canvas_animation.htm
+* http://stackoverflow.com/questions/11182478/performance-css3-animations-vs-html5-canvas
+
+					</section>
+					<section data-markdown>
+## Resources, References, Links
+* http://css3.bradshawenterprises.com/transitions/#delays
+* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions
+* https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function
+* https://robots.thoughtbot.com/css-animation-for-beginners
+* https://www.smashingmagazine.com/2011/09/the-guide-to-css-animation-principles-and-examples/
+* https://ihatetomatoes.net/the-guide-to-css-animations-for-the-web/
+* http://www.creativebloq.com/css3/animation-with-css3-712437
+					</section>
+				</section>
+      </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+				slideNumber: true,
+				fragments: false,
+
+        width: 1024,
+        height: 768,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/anything/anything.js' },
+					{ src: 'plugin/reveal-css-snippet/css-snippet.js', callback: function() {
+						document.getElementById('css2dtransforms-slide').appendChild(RevealCSSSnippet({
+							cssValue: "#twodtrans-1{\r\n  transform: skew(10deg, 10deg);\r\n}\r\n\
+#twodtrans-2{\r\n  transform: scale(2, 1);\r\n}\r\n\
+#twodtrans-3{\r\n  transform: rotate(60deg);\r\n}\r\n\
+#twodtrans-4{\r\n  transform: translate(-10px, 50px);\r\n}\r\n"
+						}));
+            document.getElementById('css3dtransforms-slide').appendChild(RevealCSSSnippet({
+              cssValue: "#threedtrans-1{\r\n  transform: rotateX(180deg);\r\n}\r\n\
+#threedtrans-2{\r\n  transform: rotateY(180deg);\r\n}\r\n\
+#threedtrans-3{\r\n  transform: rotateZ(180deg);\r\n}\r\n\
+/* perspective: 800px; perspective-origin: 50% 100px; */"
+            }));
+            document.getElementById('css3anim-slide').appendChild(RevealCSSSnippet({
+              cssValue: "\
+@keyframes fadeOut {\r\n\
+  0% {opacity: 1;}\r\n\
+  100% {opacity: 0;}\r\n\
+}\r\n\
+@keyframes pulse {\r\n\
+    0% { transform: scale(1); }\r\n\
+    50% { transform: scale(1.2); }\r\n\
+    100% { transform: scale(1); }\r\n\
+}\r\n\
+#css3animation{\r\n\
+  animation-name: pulse, fadeOut;\r\n\
+  animation-duration: 1s, 5s;\r\n\
+  animation-delay: 0s, 5s;\r\n\
+  animation-iteration-count: infinite, infinite;\r\n\
+  animation-play-state: paused;\r\n\
+}\r\n"
+            }));
+
+
+					} },
+        ],
+
+        anything: [
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
